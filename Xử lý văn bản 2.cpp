@@ -1,33 +1,58 @@
 #include <bits/stdc++.h>
+#include<math.h>
 using namespace std;
 #define faster                   \
     ios::sync_with_stdio(false); \
     cin.tie(0);                  \
     cout.tie(0);
 #define ll long long
-string s;
-bool kt;
-int main(){
-    faster;
-    kt=true;
-    while(cin>>s){
-        int n=s.size();
-        for(int i=0;i<=n-1;i++){
-            s[i]=tolower(s[i]);
-        }
-        if(kt){
-            s[0]=toupper(s[0]);
-            kt=false;
-        }
-        if(s[n-1]=='.'||s[n-1]=='?'||s[n-1]=='!'){
-            s.erase(n-1,1);
-            kt=true;
-            if(!s.empty()&&s[n-1]!='.'||s[n-1]!='?'||s[n-1]!='!'){
-            	s+='.';
-			}
-            cout<<s<<endl;
+void chuanhoa(string& s) {
+	stringstream ss(s);
+	string t;
 
-        }
-        else cout<<s<<" ";
-    }
+	string res = "";
+
+	while (ss >> t) {
+		for (int i = 0; i < t.length(); i++) {
+			t[i] = tolower(t[i]);
+		}
+		res = res + t + " ";
+	}
+
+	res[0] = toupper(res[0]);
+	res.pop_back();
+
+	s = res;
+}
+
+int main() {
+    faster;
+	string s;
+
+	vector<string> v;
+
+	while (getline(cin, s)) {
+		//if (s == "END") break;
+		string tmp = "";
+		for (int i = 0; i < s.length(); i++) {
+			if (s[i] == '.' || s[i] == '!' || s[i] == '?') {
+				chuanhoa(tmp);
+				tmp = tmp + s[i];
+				v.push_back(tmp);
+				tmp = "";
+			}
+			else tmp += s[i];
+		}
+
+		if (tmp != "") {
+			chuanhoa(tmp);
+			v.push_back(tmp + ".");
+		}
+	}
+
+	for (int i = 0; i < v.size(); i++) {
+		cout << v[i] << endl;
+	}
+
+	return 0;
 }
