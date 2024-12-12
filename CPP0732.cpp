@@ -5,7 +5,6 @@ using namespace std;
     cin.tie(0);                  \
     cout.tie(0);
 #define ll long long
-
 int main(){
 	faster;
 	int t;
@@ -13,19 +12,22 @@ int main(){
 	while(t--){
 		int n;
 		cin>>n;
-		int a[100005];
-		for(int i=1;i<=n;++i){
-			int x;
-			cin>>x;
-			a[i]=a[i-1]+x;
+		int a[n], b[n];
+		for(int i=0;i<n;++i){
+			cin>>a[i];
+			b[i]=a[i];
 		}
-		int check=-1;
-		for(int i=1;i<=n;++i){
-			if(a[i-1]==a[n]-a[i]){
-				check=i;
-				break;
+		for(int i=1;i<n;++i){
+			for(int j=0;j<i;++j){
+				if(a[i]>a[j]){
+					b[i]=max((a[i]+b[j]),b[i]);
+				}
 			}
 		}
-		cout<<check<<"\n";
+		int maxx=INT_MIN;
+		for(int i=0;i<n;++i){
+			maxx=max(maxx,b[i]);
+		}
+		cout<<maxx<<endl;
 	}
 }

@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include<math.h>
 using namespace std;
 #define faster                   \
     ios::sync_with_stdio(false); \
